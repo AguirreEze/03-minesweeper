@@ -8,23 +8,30 @@
     <link rel="stylesheet" href="assets/styles/style.css">
 </head>
 <body>
-    <header>
-        <h1 class="title">Minesweeper v2</h1>
-        <p class="title_text">Work in progress</p>
+    <header class="page_header">
+        <h1>Minesweeper v2</h1>
+        <p>Work in progress</p>
     </header>
-    <section>
-        <div class="board" id="board">
-            <div class="cell_unrevealed">1</div>
-            <div class="cell_unrevealed">2</div>
-            <div class="cell_unrevealed">3</div>
-            <div class="cell_unrevealed">4</div>
-            <div class="cell_unrevealed">5</div>
-            <div class="cell_unrevealed">6</div>
-            <div class="cell_unrevealed">7</div>
-            <div class="cell_unrevealed">8</div>
-            <div class="cell_unrevealed">9</div>
+    <article>
+        <div class="container">
+            <header class="board_header">
+                <div class="counter" id="mine_counter">000</div>
+                <div class="head cell_unrevealed" id="head"></div>
+                <div class="counter" id="timer">000</div>
+            </header>
+            <div class="board" id="board">
+                <div class="cell_unrevealed">1</div>
+                <div class="cell_unrevealed">2</div>
+                <div class="cell_unrevealed">3</div>
+                <div class="cell_unrevealed">4</div>
+                <div class="cell_unrevealed">5</div>
+                <div class="cell_unrevealed">6</div>
+                <div class="cell_unrevealed">7</div>
+                <div class="cell_unrevealed">8</div>
+                <div class="cell_unrevealed">9</div>
+            </div>
         </div>
-    </section>
+    </article>
     <script src="assets/scripts/script.js"></script>
 </body>
 </html>

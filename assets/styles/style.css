@@ -13,7 +13,7 @@ body{
     color: #8f8;
     box-sizing: border-box;
 }
-header{
+.page_header{
     position: relative;
     display: flex;
     height: 200px;
@@ -22,10 +22,32 @@ header{
     flex-direction: column;
     justify-content: center;
 }
-
+.container{    
+    position: relative;  
+    width: var(--board-width);
+    display: flex;    
+    flex-direction: column;
+    justify-content: center;  
+    margin-top: 100px;
+    transform: translate(-50%, 0);
+    left: 50%;
+    background-color: #fafafa;
+    border: 5px solid #fafafa;
+    
+}
+.board_header{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.counter{
+    background-color: black;
+    color: red;
+}
 .board{
     position: relative;
-    margin-top: 100px;
     display: grid; 
     grid-template-rows: repeat(var(--board-colums), 1fr);
     grid-template-columns: repeat(var(--board-rows), 1fr);
@@ -33,7 +55,6 @@ header{
     width: var(--board-width);
     transform: translate(-50%, 0);
     left: 50%;   
-    border: 5px solid #fafafa;
     user-select: none;
 }
 .cell_unrevealed{
