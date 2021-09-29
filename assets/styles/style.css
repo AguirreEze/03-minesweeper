@@ -57,7 +57,7 @@ body{
     left: 50%;   
     user-select: none;
 }
-.cell_unrevealed{
+.cell{
     margin: 0;    
     box-sizing: border-box;
     display: flex;
@@ -73,7 +73,14 @@ body{
     color: transparent;
     cursor: pointer;
 }
-.cell_unrevealed:hover{
+.cell:hover{
     background-color: #bbb;
+}
+.cell_revealed{
+    border-top: 2px solid #777;
+    border-left: 2px solid #777;
+    border-right: none;
+    border-bottom: none;
+    
 }
 
