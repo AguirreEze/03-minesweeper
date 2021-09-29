@@ -22,13 +22,29 @@ body{
     flex-direction: column;
     justify-content: center;
 }
+.form{
+    text-align: center;
+    background-color: #111;
+    border: 1px solid black;
+}
+.input{
+    width: 2rem;
+    margin-right: 1rem;
+}
+.button{
+    padding: .2rem 2rem;
+    border: 1px solid #8f8;
+    border-radius: 5rem;
+    color: #8f8;
+    background-color: inherit;
+}
 .container{    
     position: relative;  
     width: var(--board-width);
     display: flex;    
     flex-direction: column;
     justify-content: center;  
-    margin-top: 100px;
+    margin-top: 75px;
     transform: translate(-50%, 0);
     left: 50%;
     background-color: #fafafa;
