@@ -52,4 +52,7 @@ header{
     color: transparent;
     cursor: pointer;
 }
+.cell_unrevealed:hover{
+    background-color: #bbb;
+}
 
