@@ -1,9 +1,9 @@
 :root{
     --cell: 30px;
-    --board-colums: 3;
-    --board-rows: 3;
-    --board-height: 90px;
-    --board-width: 90px;
+    --board-colums: 8;
+    --board-rows: 8;
+    --board-height: 240px;
+    --board-width: 240px;
 }
 
 body{
