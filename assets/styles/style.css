@@ -45,10 +45,14 @@ body{
     flex-direction: column;
     justify-content: center;  
     margin-top: 75px;
+    padding: 10px;
     transform: translate(-50%, 0);
     left: 50%;
-    background-color: #fafafa;
-    border: 5px solid #fafafa;
+    background-color: #aaa;
+    border-top: 3px solid #ccc;
+    border-left: 3px solid #ccc;
+    border-right: 3px solid #888;
+    border-bottom: 3px solid #888;
     user-select: none;
     
 }
@@ -58,10 +62,17 @@ body{
     justify-content: space-between;
     align-items: center;
     margin-bottom: 5px;
+    background-color: #aaa;
+    border-bottom: 3px solid #ccc;
+    border-right: 3px solid #ccc;
+    border-left: 3px solid #888;
+    border-top: 3px solid #888;
 }
 .counter{
     background-color: black;
     color: red;
+    margin: 0 .5rem;
+    font-size: 1.5rem;
 }
 .board{
     position: relative;
@@ -72,6 +83,10 @@ body{
     width: var(--board-width);
     transform: translate(-50%, 0);
     left: 50%;   
+    border-bottom: 3px solid #ccc;
+    border-right: 3px solid #ccc;
+    border-left: 3px solid #888;
+    border-top: 3px solid #888;
 }
 .cell{
     margin: 0;    
@@ -96,7 +111,19 @@ body{
     border-top: 2px solid #777;
     border-left: 2px solid #777;
     border-right: none;
-    border-bottom: none;    
+    border-bottom: none;
+    cursor: default;    
+}
+.head_back{
+    /* position: absolute; */
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background-color: yellow;   
+}
+.head_frame{
+    height: 40px;
+    width: 40px;
 }
 .one{
     color: #00f;
