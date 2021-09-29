@@ -80,7 +80,30 @@ body{
     border-top: 2px solid #777;
     border-left: 2px solid #777;
     border-right: none;
-    border-bottom: none;
-    
+    border-bottom: none;    
+}
+.one{
+    color: #00f;
+}
+.two{
+    color: #008000;
+}
+.three{
+    color: #f00;
+}
+.four{
+    color: #000080;
+}
+.five{
+    color: #800000;
+}
+.six{
+    color: #008080;
+}
+.seven{
+    color: #000;
+}
+.eight{
+    color: #808080;
 }
 
