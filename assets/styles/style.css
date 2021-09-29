@@ -33,6 +33,7 @@ body{
     left: 50%;
     background-color: #fafafa;
     border: 5px solid #fafafa;
+    user-select: none;
     
 }
 .board_header{
@@ -55,7 +56,6 @@ body{
     width: var(--board-width);
     transform: translate(-50%, 0);
     left: 50%;   
-    user-select: none;
 }
 .cell{
     margin: 0;    
