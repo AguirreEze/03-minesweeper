@@ -23,6 +23,7 @@ body{
     justify-content: center;
 }
 .form{
+    padding-top: .5rem;
     text-align: center;
     background-color: #111;
     border: 1px solid black;
@@ -30,6 +31,10 @@ body{
 .input{
     width: 2rem;
     margin-right: 1rem;
+}
+.error_mensage{
+    color: red;
+    font-size: .8rem;
 }
 .button{
     padding: .2rem 2rem;
