@@ -45,11 +45,27 @@ const dificultySetting = () =>{
 
 form[4].addEventListener('click', () => buildBoard())
 
-const buildBoard = async (board) =>{
+const buildBoard = async () =>{
     try{
-        const board = await getBoard()
+        const [columns, rows, bombs] = await getBoard()
         errorMensage.textContent = ''
-        console.log(board)
+        root = document.documentElement
+        root.style.setProperty('--board-colums', columns)
+        root.style.setProperty('--board-rows', rows)
+        root.style.setProperty('--board-height', (columns * 30) + 'px')
+        root.style.setProperty('--board-width', (rows*30) + 'px')
+        while(board.firstChild){
+            board.removeChild(board.firstChild)
+        }
+        const fragment = document.createDocumentFragment()
+        for(let i = 0; i < columns * rows; i++){
+            const cell = document.createElement('DIV')
+            cell.setAttribute('class', 'cell')
+            cell.setAttribute('id', i)
+            //set bomb value?
+            fragment.append(cell)
+        }
+        board.append(fragment)
     }catch (error){
         errorMensage.textContent = error +'. (Hover over the option to see the valid values)'
     }
