@@ -80,8 +80,8 @@ getBoard = async () => {
         case 'expert':
             return([16, 30, 99])
         case 'custom':
-            const columns = parseInt(form[1].value)
-            const rows = parseInt(form[2].value)
+            const rows = parseInt(form[1].value)
+            const columns = parseInt(form[2].value)
             const bombs = parseInt(form[3].value)
             if(columns < 8 || columns > 32) {
                 throw new Error('Invalid Columns value')
@@ -89,7 +89,7 @@ getBoard = async () => {
                 throw new Error('Invalid Rows value')
             }else if(bombs < 1 || bombs > (columns * rows / 3)){
                 throw new Error ('Invalid Bombs value')
-            }else return ([columns, rows, bombs])
+            }else return ([rows, columns, bombs])
     }
 }
 
