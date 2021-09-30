@@ -124,6 +124,13 @@ body{
     height: 40px;
     width: 40px;
 }
+.head{
+    position: relative;
+    left: -1px;
+    top: -1px;
+    width: 36px;
+    height: 36px;
+}
 .one{
     color: #00f;
 }
