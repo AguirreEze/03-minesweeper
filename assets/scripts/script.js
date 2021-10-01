@@ -76,6 +76,7 @@ const buildBoard = async () =>{
         bombIndex = setBombs(columns, rows, bombs)
         resetTimer()
         head.setAttribute('src', 'assets/images/smile.svg')
+        gameOver = false
     }catch (error){
         errorMensage.textContent = error +'. (Hover over the option to see the valid values)'
     }
@@ -132,12 +133,11 @@ const resetTimer = () =>{
 
 const revealCell = (cell) => {
     if(gameOver) return
-    else{
-        if(isBomb(cell)){
-            setGameOver()
-            head.setAttribute('src', 'assets/images/dead.svg')
-        }
+    if(isBomb(cell)){
+        setGameOver()
+        head.setAttribute('src', 'assets/images/dead.svg')
     }
+    
 }
 
 const isBomb = (cell) =>{
