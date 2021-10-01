@@ -75,6 +75,7 @@ const buildBoard = async () =>{
         board.append(fragment)
         bombIndex = setBombs(columns, rows, bombs)
         resetTimer()
+        head.setAttribute('src', 'assets/images/smile.svg')
     }catch (error){
         errorMensage.textContent = error +'. (Hover over the option to see the valid values)'
     }
