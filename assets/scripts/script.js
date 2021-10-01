@@ -6,6 +6,8 @@ const timer = document.getElementById('timer')
 const board = document.getElementById('board')
 
 let bombIndex = []
+let counter = 1
+let countUp = false
 
 addEventListener('load', () => buildBoard())
 form[0].addEventListener('change', () => dificultySetting())
@@ -45,8 +47,6 @@ const dificultySetting = () =>{
             break;
         }
     }
-
-
 
 const buildBoard = async () =>{
     try{
@@ -107,4 +107,21 @@ setBombs = (columns, rows, bombs) => {
         }
     }
     return bombPosition
+}
+
+const gameTimer = setInterval(() => {
+    if(!countUp || counter > 999) return 
+    else{
+        timer.textContent = counter
+        counter++
+        gameTimer
+    }
+}, 1000);
+
+const startTimer = () => countUp = true
+const stopTimer = () => countUp = false
+const resetTimer = () =>{
+    countUp = false
+    counter = 0
+    timer.textContent = '000' 
 }
