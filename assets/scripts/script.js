@@ -7,7 +7,10 @@ const board = document.getElementById('board')
 
 let bombIndex = []
 
-form[0].addEventListener('change', () =>dificultySetting())
+addEventListener('load', () => buildBoard())
+form[0].addEventListener('change', () => dificultySetting())
+form[4].addEventListener('click', () => buildBoard())
+
 
 const dificultySetting = () =>{
     if(form[0].value == 'custom'){
@@ -44,7 +47,6 @@ const dificultySetting = () =>{
     }
 
 
-form[4].addEventListener('click', () => buildBoard())
 
 const buildBoard = async () =>{
     try{
@@ -55,6 +57,7 @@ const buildBoard = async () =>{
         root.style.setProperty('--board-rows', rows)
         root.style.setProperty('--board-height', (columns * 30) + 'px')
         root.style.setProperty('--board-width', (rows*30) + 'px')
+        mineCounter.textContent = bombs
         while(board.firstChild){
             board.removeChild(board.firstChild)
         }
@@ -63,7 +66,6 @@ const buildBoard = async () =>{
             const cell = document.createElement('DIV')
             cell.setAttribute('class', 'cell')
             cell.setAttribute('id', i)
-            //set bomb value?
             fragment.append(cell)
         }
         board.append(fragment)
