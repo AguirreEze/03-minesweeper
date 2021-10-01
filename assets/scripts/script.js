@@ -12,7 +12,9 @@ let countUp = false
 addEventListener('load', () => buildBoard())
 form[0].addEventListener('change', () => dificultySetting())
 form[4].addEventListener('click', () => buildBoard())
-
+board.addEventListener('mouseup', (e) => {
+    startTimer()
+})
 
 const dificultySetting = () =>{
     if(form[0].value == 'custom'){
@@ -70,6 +72,7 @@ const buildBoard = async () =>{
         }
         board.append(fragment)
         bombIndex = setBombs(columns, rows, bombs)
+        resetTimer()
     }catch (error){
         errorMensage.textContent = error +'. (Hover over the option to see the valid values)'
     }
@@ -120,6 +123,6 @@ const startTimer = () => countUp = true
 const stopTimer = () => countUp = false
 const resetTimer = () =>{
     stopTimer()
-    counter = 0
+    counter = 1
     timer.textContent = '000' 
 }
