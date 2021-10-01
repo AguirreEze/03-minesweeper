@@ -5,6 +5,7 @@ const head = document.getElementById('head')
 const timer = document.getElementById('timer')
 const board = document.getElementById('board')
 
+let gameOver = false 
 let bombIndex = []
 let counter = 1
 let countUp = false
@@ -13,7 +14,8 @@ addEventListener('load', () => buildBoard())
 form[0].addEventListener('change', () => dificultySetting())
 form[4].addEventListener('click', () => buildBoard())
 board.addEventListener('mouseup', (e) => {
-    startTimer()
+    if(!gameOver)startTimer()
+    revealCell(e.target)
 })
 
 const dificultySetting = () =>{
@@ -125,4 +127,23 @@ const resetTimer = () =>{
     stopTimer()
     counter = 1
     timer.textContent = '000' 
+}
+
+const revealCell = (cell) => {
+    if(gameOver) return
+    else{
+        if(isBomb(cell)){
+            setGameOver()
+            head.setAttribute('src', 'assets/images/dead.svg')
+        }
+    }
+}
+
+const isBomb = (cell) =>{
+    return (bombIndex.indexOf(parseInt(cell.id)) != -1)
+}
+
+const setGameOver = () =>{
+    stopTimer()
+    gameOver = true
 }
