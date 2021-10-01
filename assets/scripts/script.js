@@ -111,17 +111,15 @@ setBombs = (columns, rows, bombs) => {
 
 const gameTimer = setInterval(() => {
     if(!countUp || counter > 999) return 
-    else{
-        timer.textContent = counter
-        counter++
-        gameTimer
-    }
+    timer.textContent = counter
+    counter++
+    gameTimer
 }, 1000);
 
 const startTimer = () => countUp = true
 const stopTimer = () => countUp = false
 const resetTimer = () =>{
-    countUp = false
+    stopTimer()
     counter = 0
     timer.textContent = '000' 
 }
