@@ -5,6 +5,7 @@ const head = document.getElementById('head')
 const timer = document.getElementById('timer')
 const board = document.getElementById('board')
 
+let bombIndex = []
 
 form[0].addEventListener('change', () =>dificultySetting())
 
@@ -66,6 +67,7 @@ const buildBoard = async () =>{
             fragment.append(cell)
         }
         board.append(fragment)
+        bombIndex = setBombs(columns, rows, bombs)
     }catch (error){
         errorMensage.textContent = error +'. (Hover over the option to see the valid values)'
     }
@@ -93,3 +95,14 @@ getBoard = async () => {
     }
 }
 
+setBombs = (columns, rows, bombs) => {
+    let cells = columns * rows
+    let bombPosition = []
+    while(bombPosition.length < bombs){
+        const position = Math.ceil(Math.random() * cells) -1
+        if(bombPosition.indexOf(position) == -1){
+            bombPosition.push(position)
+        }
+    }
+    return bombPosition
+}
