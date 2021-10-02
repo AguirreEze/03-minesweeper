@@ -7,6 +7,8 @@ const board = document.getElementById('board')
 
 let gameOver = false 
 let bombIndex = []
+let boardRows
+let boardColumns
 let counter = 1
 let countUp = false
 
@@ -74,6 +76,8 @@ const buildBoard = async () =>{
         }
         board.append(fragment)
         bombIndex = setBombs(columns, rows, bombs)
+        boardColumns = columns
+        boardRows = rows
         resetTimer()
         head.setAttribute('src', 'assets/images/smile.svg')
         gameOver = false
@@ -137,7 +141,7 @@ const revealCell = (cell) => {
         setGameOver()
         head.setAttribute('src', 'assets/images/dead.svg')
     }
-    
+    const value = calculateCellValue(cell)
 }
 
 const isBomb = (cell) =>{
@@ -147,4 +151,32 @@ const isBomb = (cell) =>{
 const setGameOver = () =>{
     stopTimer()
     gameOver = true
+}
+
+calculateCellValue = (cell) =>{
+    let boardCells = (boardColumns * boardRows)
+    if(cell.id == 0){
+        console.log('top left')
+    }
+    if(cell.id == boardRows - 1){
+        console.log('top right')
+    }
+    if(cell.id == boardCells - boardRows){
+        console.log('bottom left')
+    }
+    if(cell.id == boardCells -1){
+        console.log('bottom right')
+    }
+    if(cell.id < boardRows){
+        console.log('upper row')
+    }
+    if(cell.id >= boardCells - boardRows){
+        console.log('lower Row')
+    }
+    if((parseInt(cell.id) + 1) % boardRows == 0){
+        console.log('right column')
+    }
+    if(parseInt(cell.id) % boardRows == 0){
+        console.log('left column')
+    }
 }
