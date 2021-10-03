@@ -72,7 +72,7 @@ const buildBoard = async () =>{
             for(let j = 0; j < rows; j++){
                 const cell = document.createElement('DIV')
                 cell.setAttribute('class', 'cell')
-                cell.setAttribute('id', `${i} ${j}`)
+                cell.setAttribute('id', `${i}${j}`)
                 fragment.append(cell)
             }
         }
@@ -115,7 +115,7 @@ setBombs = (columns, rows, bombs) => {
     while(bombPosition.length < bombs){
         const positionColumn = Math.ceil(Math.random() * columns) -1
         const positionRow = Math.ceil(Math.random() * rows) -1
-        const bomb = `${positionColumn} ${positionRow}`
+        const bomb = `${positionColumn}${positionRow}`
         if(bombPosition.indexOf(bomb) == -1){
             bombPosition.push(bomb)
         }
@@ -157,29 +157,5 @@ const setGameOver = () =>{
 }
 
 calculateCellValue = (cell) =>{
-    let boardCells = (boardColumns * boardRows)
-    if(cell.id == 0){
-        console.log('top left')
-    }
-    if(cell.id == boardRows - 1){
-        console.log('top right')
-    }
-    if(cell.id == boardCells - boardRows){
-        console.log('bottom left')
-    }
-    if(cell.id == boardCells -1){
-        console.log('bottom right')
-    }
-    if(cell.id < boardRows){
-        console.log('upper row')
-    }
-    if(cell.id >= boardCells - boardRows){
-        console.log('lower Row')
-    }
-    if((parseInt(cell.id) + 1) % boardRows == 0){
-        console.log('right column')
-    }
-    if(parseInt(cell.id) % boardRows == 0){
-        console.log('left column')
-    }
+    console.dir(cell.id)
 }
