@@ -111,12 +111,14 @@ getBoard = async () => {
 }
 
 setBombs = (columns, rows, bombs) => {
-    let cells = columns * rows
+    // let cells = columns * rows
     let bombPosition = []
     while(bombPosition.length < bombs){
-        const position = Math.ceil(Math.random() * cells) -1
-        if(bombPosition.indexOf(position) == -1){
-            bombPosition.push(position)
+        const positionColumn = Math.ceil(Math.random() * columns) -1
+        const positionRow = Math.ceil(Math.random() * rows) -1
+        const bomb = `${positionColumn} ${positionRow}`
+        if(bombPosition.indexOf(bomb) == -1){
+            bombPosition.push(bomb)
         }
     }
     return bombPosition
