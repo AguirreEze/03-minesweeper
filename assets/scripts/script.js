@@ -168,5 +168,5 @@ calculateCellValue = (cell) =>{
     if(isBomb(`${xPos}${parseInt(yPos)+1}`)) value++
     if(isBomb(`${parseInt(xPos)-1}${parseInt(yPos)+1}`)) value++
     if(isBomb(`${parseInt(xPos)-1}${yPos}`)) value++
-    console.log(value)
+    return value
 }
