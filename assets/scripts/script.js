@@ -157,7 +157,16 @@ const setGameOver = () =>{
 }
 
 calculateCellValue = (cell) =>{
-    let xPos = cell.id.slice(1)
-    let yPos = cell.id.slice(0, -1)
-    // if
+    let value = 0
+    let yPos = cell.id.slice(1)
+    let xPos = cell.id.slice(0, -1)
+    if(isBomb(`${parseInt(xPos)-1}${parseInt(yPos)-1}`)) value++
+    if(isBomb(`${xPos}${parseInt(yPos)-1}`)) value++
+    if(isBomb(`${parseInt(xPos)+1}${parseInt(yPos-1)}`)) value++
+    if(isBomb(`${parseInt(xPos)+1}${yPos}`)) value++
+    if(isBomb(`${parseInt(xPos)+1}${parseInt(yPos)+1}`)) value++
+    if(isBomb(`${xPos}${parseInt(yPos)+1}`)) value++
+    if(isBomb(`${parseInt(xPos)-1}${parseInt(yPos)+1}`)) value++
+    if(isBomb(`${parseInt(xPos)-1}${yPos}`)) value++
+    console.log(value)
 }
