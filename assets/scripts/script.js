@@ -140,15 +140,15 @@ const resetTimer = () =>{
 
 const revealCell = (cell) => {
     if(gameOver) return
-    if(isBomb(cell)){
+    if(isBomb(cell.id)){
         setGameOver()
         head.setAttribute('src', 'assets/images/dead.svg')
     }
     const value = calculateCellValue(cell)
 }
 
-const isBomb = (cell) =>{
-    return (bombIndex.indexOf(cell.id) != -1)
+const isBomb = (id) =>{
+    return (bombIndex.indexOf(id) != -1)
 }
 
 const setGameOver = () =>{
@@ -157,5 +157,7 @@ const setGameOver = () =>{
 }
 
 calculateCellValue = (cell) =>{
-    console.dir(cell.id)
+    let xPos = cell.id.slice(1)
+    let yPos = cell.id.slice(0, -1)
+    // if
 }
