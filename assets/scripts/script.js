@@ -68,11 +68,13 @@ const buildBoard = async () =>{
             board.removeChild(board.firstChild)
         }
         const fragment = document.createDocumentFragment()
-        for(let i = 0; i < columns * rows; i++){
-            const cell = document.createElement('DIV')
-            cell.setAttribute('class', 'cell')
-            cell.setAttribute('id', i)
-            fragment.append(cell)
+        for(let i = 0; i < columns; i++){
+            for(let j = 0; j < rows; j++){
+                const cell = document.createElement('DIV')
+                cell.setAttribute('class', 'cell')
+                cell.setAttribute('id', `${i} ${j}`)
+                fragment.append(cell)
+            }
         }
         board.append(fragment)
         bombIndex = setBombs(columns, rows, bombs)
