@@ -111,7 +111,6 @@ getBoard = async () => {
 }
 
 setBombs = (columns, rows, bombs) => {
-    // let cells = columns * rows
     let bombPosition = []
     while(bombPosition.length < bombs){
         const positionColumn = Math.ceil(Math.random() * columns) -1
@@ -149,7 +148,7 @@ const revealCell = (cell) => {
 }
 
 const isBomb = (cell) =>{
-    return (bombIndex.indexOf(parseInt(cell.id)) != -1)
+    return (bombIndex.indexOf(cell.id) != -1)
 }
 
 const setGameOver = () =>{
