@@ -82,7 +82,7 @@ const buildBoard = async () =>{
             for(let j = 0; j < rows; j++){
                 const cell = document.createElement('DIV')
                 cell.setAttribute('class', 'cell')
-                cell.setAttribute('id', `${i}${j}`)
+                cell.setAttribute('id', `${i} ${j}`)
                 fragment.append(cell)
             }
         }
@@ -125,7 +125,7 @@ setBombs = (columns, rows, bombs) => {
     while(bombPosition.length < bombs){
         const positionColumn = Math.ceil(Math.random() * columns) -1
         const positionRow = Math.ceil(Math.random() * rows) -1
-        const bomb = `${positionColumn}${positionRow}`
+        const bomb = `${positionColumn} ${positionRow}`
         if(bombPosition.indexOf(bomb) == -1){
             bombPosition.push(bomb)
         }
@@ -233,16 +233,17 @@ const showAllBombs = () =>{
 }
 
 const getAdjacentCells = (id) =>{
-    let yPos = id.slice(1)
-    let xPos = id.slice(0, -1)
+    const separationIndex = id.indexOf(' ')
+    let yPos = id.slice(separationIndex)
+    let xPos = id.slice(0, -(separationIndex))
     return[
-        `${parseInt(xPos)-1}${parseInt(yPos)-1}`,
-        `${parseInt(xPos)}${parseInt(yPos)-1}`,
-        `${parseInt(xPos)+1}${parseInt(yPos)-1}`,
-        `${parseInt(xPos)+1}${parseInt(yPos)}`,
-        `${parseInt(xPos)+1}${parseInt(yPos)+1}`,
-        `${parseInt(xPos)}${parseInt(yPos)+1}`,
-        `${parseInt(xPos)-1}${parseInt(yPos)+1}`,
-        `${parseInt(xPos)-1}${parseInt(yPos)}`,
+        `${parseInt(xPos)-1} ${parseInt(yPos)-1}`,
+        `${parseInt(xPos)} ${parseInt(yPos)-1}`,
+        `${parseInt(xPos)+1} ${parseInt(yPos)-1}`,
+        `${parseInt(xPos)+1} ${parseInt(yPos)}`,
+        `${parseInt(xPos)+1} ${parseInt(yPos)+1}`,
+        `${parseInt(xPos)} ${parseInt(yPos)+1}`,
+        `${parseInt(xPos)-1} ${parseInt(yPos)+1}`,
+        `${parseInt(xPos)-1} ${parseInt(yPos)}`,
     ]
 }
