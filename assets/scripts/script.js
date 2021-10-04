@@ -143,8 +143,11 @@ const revealCell = (cell) => {
     if(isBomb(cell.id)){
         setGameOver()
         head.setAttribute('src', 'assets/images/dead.svg')
+        return
     }
     const value = calculateCellValue(cell)
+    if(value != 0) cell.textContent = value
+    setColor(cell, value)
 }
 
 const isBomb = (id) =>{
@@ -156,7 +159,7 @@ const setGameOver = () =>{
     gameOver = true
 }
 
-calculateCellValue = (cell) =>{
+const calculateCellValue = (cell) =>{
     let value = 0
     let yPos = cell.id.slice(1)
     let xPos = cell.id.slice(0, -1)
@@ -169,4 +172,33 @@ calculateCellValue = (cell) =>{
     if(isBomb(`${parseInt(xPos)-1}${parseInt(yPos)+1}`)) value++
     if(isBomb(`${parseInt(xPos)-1}${yPos}`)) value++
     return value
+}
+
+const setColor = (cell, value) => {
+    switch(value){
+        case 1:
+            cell.classList.add('one')
+            break;
+        case 2:
+            cell.classList.add('two')
+            break;
+        case 3:
+            cell.classList.add('three')
+            break;
+        case 4:
+            cell.classList.add('four')
+            break;
+        case 5:
+            cell.classList.add('five')
+            break;
+        case 6:
+            cell.classList.add('six')
+            break;
+        case 7:
+            cell.classList.add('seven')
+            break;
+        case 8:
+            cell.classList.add('eight')
+            break;          
+    }
 }
