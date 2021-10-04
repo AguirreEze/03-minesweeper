@@ -150,7 +150,9 @@ const resetTimer = () =>{
 
 const revealCell = (cell) => {
     if(gameOver) return
-    if(isBomb(cell.id)){
+    console.dir(cell)
+    if(cell.classList[0]== 'cell'){
+        if(isBomb(cell.id)){
         cell.classList.add('bomb_explode', 'no_hover')
         setGameOver()
         return
@@ -159,6 +161,7 @@ const revealCell = (cell) => {
     if(value != 0) cell.textContent = value
     setColor(cell, value)
     cell.classList.add('cell_revealed', 'no_hover')
+}
 }
 
 const isBomb = (id) =>{
