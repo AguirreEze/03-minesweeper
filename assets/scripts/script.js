@@ -17,8 +17,16 @@ form[0].addEventListener('change', () => dificultySetting())
 form[4].addEventListener('click', () => buildBoard())
 head.addEventListener('click',() => buildBoard())
 board.addEventListener('mouseup', (e) => {
-    if(!gameOver)startTimer()
+    if(!gameOver){
+        startTimer()
+        head.setAttribute('src', 'assets/images/smile.svg')
+    }
     revealCell(e.target)
+})
+board.addEventListener('mousedown', () => {
+    if(!gameOver){
+        head.setAttribute('src', 'assets/images/surprise.svg')
+    }
 })
 
 
@@ -143,10 +151,8 @@ const resetTimer = () =>{
 const revealCell = (cell) => {
     if(gameOver) return
     if(isBomb(cell.id)){
-        setGameOver()
-        head.setAttribute('src', 'assets/images/dead.svg')
         cell.classList.add('bomb_explode')
-        showAllBombs()
+        setGameOver()
         return
     }
     const value = calculateCellValue(cell)
@@ -160,6 +166,8 @@ const isBomb = (id) =>{
 }
 
 const setGameOver = () =>{
+    head.setAttribute('src', 'assets/images/dead.svg')
+    showAllBombs()
     stopTimer()
     gameOver = true
 }
