@@ -158,7 +158,7 @@ const revealCell = (cell) => {
     }
     const value = calculateCellValue(cell)
     setColor(cell, value)
-    cell.classList.add('cell_revealed', 'no_hover')
+    cell.classList.replace('cell', 'cell_revealed')
     if(value == 0) {
         let adjacentCells = getAdjacentCells(cell.id)
         for(let id of adjacentCells){

@@ -115,6 +115,14 @@ body{
     background-color: #bbb;
 }
 .cell_revealed{
+    margin: 0;    
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--cell);
+    width: var(--cell);
+    background-color: #aaa;
     border-top: 2px solid #777;
     border-left: 2px solid #777;
     border-right: none;
