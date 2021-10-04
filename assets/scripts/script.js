@@ -143,11 +143,14 @@ const revealCell = (cell) => {
     if(isBomb(cell.id)){
         setGameOver()
         head.setAttribute('src', 'assets/images/dead.svg')
+        cell.classList.add('bomb_explode')
+        showAllBombs()
         return
     }
     const value = calculateCellValue(cell)
     if(value != 0) cell.textContent = value
     setColor(cell, value)
+    cell.classList.add('cell_revealed')
 }
 
 const isBomb = (id) =>{
@@ -200,5 +203,15 @@ const setColor = (cell, value) => {
         case 8:
             cell.classList.add('eight')
             break;          
+    }
+}
+
+const showAllBombs = () =>{
+    for(id of bombIndex){
+        const cell = document.getElementById(id)
+        const fragment = document.createElement('img')
+        fragment.setAttribute('src', 'assets/images/bomb.svg')
+        fragment.classList.add('bomb')
+        cell.append(fragment)
     }
 }
