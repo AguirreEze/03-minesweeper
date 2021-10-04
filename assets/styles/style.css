@@ -171,6 +171,9 @@ body{
     border-bottom: none;
     cursor: default;  
 }
+.no_hover{
+    pointer-events: none;
+}
 .bomb{
     position: relative;
     width: 24px;
