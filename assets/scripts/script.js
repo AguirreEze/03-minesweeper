@@ -150,7 +150,6 @@ const resetTimer = () =>{
 
 const revealCell = (cell) => {
     if(gameOver) return
-    console.dir(cell)
     if(cell.classList[0]== 'cell'){
         if(isBomb(cell.id)){
         cell.classList.add('bomb_explode', 'no_hover')
@@ -177,16 +176,10 @@ const setGameOver = () =>{
 
 const calculateCellValue = (cell) =>{
     let value = 0
-    let yPos = cell.id.slice(1)
-    let xPos = cell.id.slice(0, -1)
-    if(isBomb(`${parseInt(xPos)-1}${parseInt(yPos)-1}`)) value++
-    if(isBomb(`${xPos}${parseInt(yPos)-1}`)) value++
-    if(isBomb(`${parseInt(xPos)+1}${parseInt(yPos-1)}`)) value++
-    if(isBomb(`${parseInt(xPos)+1}${yPos}`)) value++
-    if(isBomb(`${parseInt(xPos)+1}${parseInt(yPos)+1}`)) value++
-    if(isBomb(`${xPos}${parseInt(yPos)+1}`)) value++
-    if(isBomb(`${parseInt(xPos)-1}${parseInt(yPos)+1}`)) value++
-    if(isBomb(`${parseInt(xPos)-1}${yPos}`)) value++
+    let adjacentCells = getAdjacentCells(cell.id)
+    for(let id of adjacentCells) {
+        if(isBomb(id)) value++
+    }
     return value
 }
 
@@ -227,4 +220,19 @@ const showAllBombs = () =>{
         fragment.classList.add('bomb')
         cell.append(fragment)
     }
+}
+
+const getAdjacentCells = (id) =>{
+    let yPos = id.slice(1)
+    let xPos = id.slice(0, -1)
+    return[
+        `${parseInt(xPos)-1}${parseInt(yPos)-1}`,
+        `${parseInt(xPos)}${parseInt(yPos)-1}`,
+        `${parseInt(xPos)+1}${parseInt(yPos)-1}`,
+        `${parseInt(xPos)+1}${parseInt(yPos)}`,
+        `${parseInt(xPos)+1}${parseInt(yPos)+1}`,
+        `${parseInt(xPos)}${parseInt(yPos)+1}`,
+        `${parseInt(xPos)-1}${parseInt(yPos)+1}`,
+        `${parseInt(xPos)-1}${parseInt(yPos)}`,
+    ]
 }
