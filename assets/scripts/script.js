@@ -15,10 +15,12 @@ let countUp = false
 addEventListener('load', () => buildBoard())
 form[0].addEventListener('change', () => dificultySetting())
 form[4].addEventListener('click', () => buildBoard())
+head.addEventListener('click',() => buildBoard())
 board.addEventListener('mouseup', (e) => {
     if(!gameOver)startTimer()
     revealCell(e.target)
 })
+
 
 const dificultySetting = () =>{
     if(form[0].value == 'custom'){
