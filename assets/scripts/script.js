@@ -157,9 +157,19 @@ const revealCell = (cell) => {
         return
     }
     const value = calculateCellValue(cell)
-    if(value != 0) cell.textContent = value
     setColor(cell, value)
     cell.classList.add('cell_revealed', 'no_hover')
+    if(value == 0) {
+        let adjacentCells = getAdjacentCells(cell.id)
+        for(let id of adjacentCells){
+            let newCell = document.getElementById(id)
+            if(newCell){
+                if(newCell.classList[1] != 'cell_revealed')revealCell(newCell)
+            }
+        }
+    }else{
+    cell.textContent = value
+    }
 }
 }
 
