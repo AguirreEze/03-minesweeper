@@ -9,10 +9,18 @@ let gameOver = false
 let bombIndex = []
 let boardRows
 let boardColumns
+let boardBombs
 let counter = 1
 let countUp = false
 
 addEventListener('load', () => buildBoard())
+form.addEventListener('change', () =>{
+    if(form[1].value == boardRows && form[2].value == boardColumns && form[3].value == boardBombs){
+        form[4].value = 'Reset Game'
+    } else {
+        form[4].value = 'Start Game'
+    }
+})
 form[0].addEventListener('change', () => dificultySetting())
 form[4].addEventListener('click', () => buildBoard())
 head.addEventListener('click',() => buildBoard())
@@ -90,6 +98,7 @@ const buildBoard = async () =>{
         bombIndex = setBombs(columns, rows, bombs)
         boardColumns = columns
         boardRows = rows
+        boardBombs = bombs
         resetTimer()
         head.setAttribute('src', 'assets/images/smile.svg')
         gameOver = false
