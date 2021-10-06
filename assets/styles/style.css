@@ -214,7 +214,7 @@ body{
         transform: translate(0, 0);
         left: auto;
     }
-}
-.scroll-y{
-    overflow-x: scroll;
+    .scroll-y{
+        overflow-x: scroll;
+    }
 }
