@@ -79,8 +79,8 @@ const buildBoard = async () =>{
         root = document.documentElement
         root.style.setProperty('--board-colums', columns)
         root.style.setProperty('--board-rows', rows)
-        root.style.setProperty('--board-height', (columns * 30) + 'px')
-        root.style.setProperty('--board-width', (rows*30) + 'px')
+        root.style.setProperty('--board-height', (columns * 25) + 'px')
+        root.style.setProperty('--board-width', (rows*25) + 'px')
         mineCounter.textContent = bombs
         while(board.firstChild){
             board.removeChild(board.firstChild)
