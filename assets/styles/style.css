@@ -32,7 +32,6 @@ body{
     width: 2.5rem;
     margin-right: 1rem;
 }
-
 .error_mensage{
     color: red;
     font-size: .8rem;
@@ -60,7 +59,6 @@ body{
     border-right: 3px solid #888;
     border-bottom: 3px solid #888;
     user-select: none;
-    
 }
 .board_header{
     box-sizing: border-box;
@@ -97,6 +95,7 @@ body{
     border-top: 3px solid #888;
 }
 .cell{
+    position: relative;
     margin: 0;    
     box-sizing: border-box;
     display: flex;
@@ -186,4 +185,26 @@ body{
     position: relative;
     width: 24px;
     height: 24px;
+}
+@media (max-width: 710px) {
+    .form{
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .form > *{
+        justify-self: center;
+        text-align: center;
+        margin-top: 1em;
+    } 
+    .dificulty{
+        width: 7em;
+    }
+    .button{
+        position: relative;
+        left: 50%;
+        width: 10em;
+        margin-bottom: 1em;
+    }
+    
 }
