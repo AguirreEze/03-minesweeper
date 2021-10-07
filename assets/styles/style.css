@@ -2,8 +2,8 @@
     --cell: 25px;
     --board-colums: 8;
     --board-rows: 8;
-    --board-height: 240px;
-    --board-width: 240px;
+    --board-height: 200px;
+    --board-width: 200px;
 }
 
 body{
@@ -94,6 +94,7 @@ body{
     border-left: 3px solid #888;
     border-top: 3px solid #888;
 }
+
 .cell{
     position: relative;
     margin: 0;    
@@ -211,7 +212,18 @@ body{
         transform: translate(0, 0);
         left: auto;
     }
-    .scroll-x{
+    .cointainer{
         overflow-x: auto;
+    }
+}
+/* .container{
+    animation: board-load 1s forwards
+} */
+@keyframes board-load{
+    0%{
+        transform: scale(0)
+    }
+    100%{
+        transform: scale(1)
     }
 }
