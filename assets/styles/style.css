@@ -58,12 +58,13 @@ body{
     border-left: 3px solid #ccc;
     border-right: 3px solid #888;
     border-bottom: 3px solid #888;
+    border-radius: 15px;
     user-select: none;
 }
 .board_header{
     box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin-bottom: 5px;
     background-color: #aaa;
@@ -71,14 +72,16 @@ body{
     border-right: 3px solid #ccc;
     border-left: 3px solid #888;
     border-top: 3px solid #888;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 .counter{
     background-color: black;
     color: red;
     width: 42px;
-    margin: 0 .5rem;
+    margin: 0 .7rem;
     font-size: 1.5rem;
-    text-align: right;
+    text-align: center;
 }
 .board{
     position: relative;
@@ -216,14 +219,16 @@ body{
         overflow-x: auto;
     }
 }
-/* .container{
-    animation: board-load 1s forwards
-} */
-@keyframes board-load{
+
+.clock_tick{
+    animation: clockTick 0.5s infinite ease-in-out alternate;
+}
+
+@keyframes clockTick {
     0%{
-        transform: scale(0)
+        color:red;
     }
     100%{
-        transform: scale(1)
+        color: #800;
     }
 }

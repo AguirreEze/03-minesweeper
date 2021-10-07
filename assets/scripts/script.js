@@ -13,9 +13,13 @@ class Timer{
     startTimer(){
         this.running = true
         this.count()
+        timerDisplay.classList.remove('clock_tick')
+        mineCounter.classList.remove('clock_tick')
     }
     stopTimer(){
         this.running = false
+        timerDisplay.classList.add('clock_tick')
+        mineCounter.classList.add('clock_tick')
     }
     resetTimer(){
         this.stopTimer()
