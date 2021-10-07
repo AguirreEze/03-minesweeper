@@ -122,8 +122,6 @@ class Board{
 let timer = new Timer()
 let boardStats = new Board()
 let gameOver = false 
-let counter = 1
-let countUp = false
 
 addEventListener('load', () => boardStats.buildBoard())
 form.addEventListener('change', () =>{
