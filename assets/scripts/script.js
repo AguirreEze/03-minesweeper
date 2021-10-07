@@ -2,12 +2,36 @@ const form = document.getElementById('form')
 const errorMensage = document.getElementById('error_mensage')
 const mineCounter = document.getElementById('mine_counter')
 const head = document.getElementById('head')
-const timer = document.getElementById('timer')
+const timerDisplay = document.getElementById('timer')
 const board = document.getElementById('board')
 
-let gameOver = false 
-let counter = 1
-let countUp = false
+class Timer{
+    constructor(){
+        this.running = false
+        this.counter = 0
+    }
+    startTimer(){
+        this.running = true
+        this.count()
+    }
+    stopTimer(){
+        this.running = false
+    }
+    resetTimer(){
+        this.stopTimer()
+        this.counter = 0
+        timerDisplay.textContent = '000'
+    }
+    count(){
+        if(this.counter >= 999) this.stopTimer()
+        if(this.running){
+            this.counter++
+            timerDisplay.textContent = this.counter
+            setTimeout(()=>this.count(), 1000)
+        }
+    }
+    
+}
 
 class Board{
     constructor(){
@@ -65,7 +89,7 @@ class Board{
             }
             board.append(fragment)
             this.setBombs()
-            resetTimer()
+            timer.resetTimer()
             head.setAttribute('src', 'assets/images/smile.svg')
             gameOver = false
         }catch (error){
@@ -94,7 +118,12 @@ class Board{
         }
     }
 }
+
+let timer = new Timer()
 let boardStats = new Board()
+let gameOver = false 
+let counter = 1
+let countUp = false
 
 addEventListener('load', () => boardStats.buildBoard())
 form.addEventListener('change', () =>{
@@ -115,7 +144,7 @@ head.addEventListener('click',() => {
 })
 board.addEventListener('mouseup', (e) => {
     if(!gameOver){
-        startTimer()
+        if(!timer.running)timer.startTimer()
         head.setAttribute('src', 'assets/images/smile.svg')
     }
     revealCell(e.target)
@@ -161,21 +190,6 @@ const dificultySetting = () =>{
         }
     }
 
-const gameTimer = setInterval(() => {
-    if(!countUp || counter > 999) return 
-    timer.textContent = counter
-    counter++
-    gameTimer
-}, 1000);
-
-const startTimer = () => countUp = true
-const stopTimer = () => countUp = false
-const resetTimer = () =>{
-    stopTimer()
-    counter = 1
-    timer.textContent = '000' 
-}
-
 const revealCell = (cell) => {
     if(gameOver) return
     if(cell.classList[0]== 'cell'){
@@ -208,7 +222,7 @@ const isBomb = (id) =>{
 const setGameOver = () =>{
     head.setAttribute('src', 'assets/images/dead.svg')
     boardStats.showAllBombs()
-    stopTimer()
+    timer.stopTimer()
     gameOver = true
 }
 
