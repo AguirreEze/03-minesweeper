@@ -83,8 +83,8 @@ body{
 .board{
     position: relative;
     display: grid; 
-    grid-template-rows: repeat(var(--board-colums), 1fr);
-    grid-template-columns: repeat(var(--board-rows), 1fr);
+    grid-template-rows: repeat(var(--board-rows), 1fr);
+    grid-template-columns: repeat(var(--board-colums), 1fr);
     height: var(--board-height);
     width: var(--board-width);
     transform: translate(-50%, 0);

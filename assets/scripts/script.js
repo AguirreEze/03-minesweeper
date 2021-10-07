@@ -6,24 +6,113 @@ const timer = document.getElementById('timer')
 const board = document.getElementById('board')
 
 let gameOver = false 
-let bombIndex = []
-let boardRows
-let boardColumns
-let boardBombs
 let counter = 1
 let countUp = false
 
-addEventListener('load', () => buildBoard())
+class Board{
+    constructor(){
+        this.bombIndex
+        switch(form[0].value){
+            case 'begginer':
+                this.rows = 8
+                this.columns = 8
+                this.bombs = 10
+            case 'intermediate':
+                this.rows = 16
+                this.columns = 16
+                this.bombs = 40
+            case 'expert':
+                this.rows = 16
+                this.columns = 30
+                this.bombs = 99
+            case 'custom':
+                const rows = parseInt(form[1].value)
+                const columns = parseInt(form[2].value)
+                const bombs = parseInt(form[3].value)
+                if(columns < 8 || columns > 32) {
+                    throw new Error('Invalid Columns value')
+                }else if(rows < 8 || rows > 24){
+                    throw new Error('Invalid Rows value')
+                }else if(bombs < 1 || bombs > (columns * rows / 3)){
+                    throw new Error ('Invalid Bombs value')
+                }else {
+                    this.rows = rows
+                    this.columns = columns
+                    this.bombs = bombs
+                }
+        }
+    }
+    buildBoard(){
+        try{
+            errorMensage.textContent = ''
+            let root = document.documentElement
+            root.style.setProperty('--board-colums', this.columns)
+            root.style.setProperty('--board-rows', this.rows)
+            root.style.setProperty('--board-height', (this.rows * 25) + 'px')
+            root.style.setProperty('--board-width', (this.columns*25) + 'px')
+            mineCounter.textContent = this.bombs
+            while(board.firstChild){
+                board.removeChild(board.firstChild)
+            }
+            const fragment = document.createDocumentFragment()
+            for(let i = 0; i < this.rows; i++){
+                for(let j = 0; j < this.columns; j++){
+                    const cell = document.createElement('DIV')
+                    cell.setAttribute('class', 'cell')
+                    cell.setAttribute('id', `${i} ${j}`)
+                    fragment.append(cell)
+                }
+            }
+            board.append(fragment)
+            this.setBombs()
+            resetTimer()
+            head.setAttribute('src', 'assets/images/smile.svg')
+            gameOver = false
+        }catch (error){
+            errorMensage.textContent = error +'. (Hover over the option to see the valid values)'
+        }
+    }
+    setBombs(){
+        let bombPosition = []
+        while(bombPosition.length < this.bombs){
+            const positionColumn = Math.ceil(Math.random() * this.columns) -1
+            const positionRow = Math.ceil(Math.random() * this.rows) -1
+            const bomb = `${positionRow} ${positionColumn}`
+            if(bombPosition.indexOf(bomb) == -1){
+                bombPosition.push(bomb)
+            }
+        }
+        this.bombIndex = bombPosition
+    }
+    showAllBombs(){
+        for(let id of this.bombIndex){
+            const cell = document.getElementById(id)
+            const fragment = document.createElement('img')
+            fragment.setAttribute('src', 'assets/images/bomb.svg')
+            fragment.classList.add('bomb')
+            cell.append(fragment)
+        }
+    }
+}
+let boardStats = new Board()
+
+addEventListener('load', () => boardStats.buildBoard())
 form.addEventListener('change', () =>{
-    if(form[1].value == boardRows && form[2].value == boardColumns && form[3].value == boardBombs){
+    if(form[1].value == boardStats.rows && form[2].value == boardStats.columns && form[3].value == boardStats.bombs){
         form[4].value = 'Reset Game'
     } else {
         form[4].value = 'Start Game'
     }
 })
 form[0].addEventListener('change', () => dificultySetting())
-form[4].addEventListener('click', () => buildBoard())
-head.addEventListener('click',() => buildBoard())
+form[4].addEventListener('click', () => {
+    boardStats = new Board()
+    boardStats.buildBoard()
+})
+head.addEventListener('click',() => {
+    boardStats = new Board()
+    boardStats.buildBoard()
+})
 board.addEventListener('mouseup', (e) => {
     if(!gameOver){
         startTimer()
@@ -72,76 +161,6 @@ const dificultySetting = () =>{
         }
     }
 
-const buildBoard = async () =>{
-    try{
-        const [columns, rows, bombs] = await getBoard()
-        errorMensage.textContent = ''
-        root = document.documentElement
-        root.style.setProperty('--board-colums', columns)
-        root.style.setProperty('--board-rows', rows)
-        root.style.setProperty('--board-height', (columns * 25) + 'px')
-        root.style.setProperty('--board-width', (rows*25) + 'px')
-        mineCounter.textContent = bombs
-        while(board.firstChild){
-            board.removeChild(board.firstChild)
-        }
-        const fragment = document.createDocumentFragment()
-        for(let i = 0; i < columns; i++){
-            for(let j = 0; j < rows; j++){
-                const cell = document.createElement('DIV')
-                cell.setAttribute('class', 'cell')
-                cell.setAttribute('id', `${i} ${j}`)
-                fragment.append(cell)
-            }
-        }
-        board.append(fragment)
-        bombIndex = setBombs(columns, rows, bombs)
-        boardColumns = columns
-        boardRows = rows
-        boardBombs = bombs
-        resetTimer()
-        head.setAttribute('src', 'assets/images/smile.svg')
-        gameOver = false
-    }catch (error){
-        errorMensage.textContent = error +'. (Hover over the option to see the valid values)'
-    }
-}
-
-getBoard = async () => {
-    switch(form[0].value){
-        case 'begginer':
-            return ([8, 8, 10])
-        case 'intermediate':
-            return([16, 16, 40])
-        case 'expert':
-            return([16, 30, 99])
-        case 'custom':
-            const rows = parseInt(form[1].value)
-            const columns = parseInt(form[2].value)
-            const bombs = parseInt(form[3].value)
-            if(columns < 8 || columns > 32) {
-                throw new Error('Invalid Columns value')
-            }else if(rows < 8 || rows > 24){
-                throw new Error('Invalid Rows value')
-            }else if(bombs < 1 || bombs > (columns * rows / 3)){
-                throw new Error ('Invalid Bombs value')
-            }else return ([rows, columns, bombs])
-    }
-}
-
-setBombs = (columns, rows, bombs) => {
-    let bombPosition = []
-    while(bombPosition.length < bombs){
-        const positionColumn = Math.ceil(Math.random() * columns) -1
-        const positionRow = Math.ceil(Math.random() * rows) -1
-        const bomb = `${positionColumn} ${positionRow}`
-        if(bombPosition.indexOf(bomb) == -1){
-            bombPosition.push(bomb)
-        }
-    }
-    return bombPosition
-}
-
 const gameTimer = setInterval(() => {
     if(!countUp || counter > 999) return 
     timer.textContent = counter
@@ -183,12 +202,12 @@ const revealCell = (cell) => {
 }
 
 const isBomb = (id) =>{
-    return (bombIndex.indexOf(id) != -1)
+    return (boardStats.bombIndex.indexOf(id) != -1)
 }
 
 const setGameOver = () =>{
     head.setAttribute('src', 'assets/images/dead.svg')
-    showAllBombs()
+    boardStats.showAllBombs()
     stopTimer()
     gameOver = true
 }
@@ -228,16 +247,6 @@ const setColor = (cell, value) => {
         case 8:
             cell.classList.add('eight')
             break;          
-    }
-}
-
-const showAllBombs = () =>{
-    for(id of bombIndex){
-        const cell = document.getElementById(id)
-        const fragment = document.createElement('img')
-        fragment.setAttribute('src', 'assets/images/bomb.svg')
-        fragment.classList.add('bomb')
-        cell.append(fragment)
     }
 }
 
