@@ -95,6 +95,7 @@ class Board{
             this.setBombs()
             timer.resetTimer()
             head.setAttribute('src', 'assets/images/smile.svg')
+            form[4].value = 'Reset Game'
             gameOver = false
         }catch (error){
             errorMensage.textContent = error +'. (Hover over the option to see the valid values)'
