@@ -152,8 +152,8 @@ board.addEventListener('mouseup', (e) => {
     }
     revealCell(e.target)
 })
-board.addEventListener('mousedown', () => {
-    if(!gameOver){
+board.addEventListener('mousedown', (e) => {
+    if(!gameOver && e.target.classList[0] == 'cell'){
         head.setAttribute('src', 'assets/images/surprise.svg')
     }
 })
