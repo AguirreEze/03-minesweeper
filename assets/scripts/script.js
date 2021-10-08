@@ -39,6 +39,7 @@ class Timer{
 
 class Board{
     constructor(){
+        this.revealedCells = 0
         this.bombIndex
         switch(form[0].value){
             case 'begginer':
@@ -69,9 +70,11 @@ class Board{
                     this.bombs = bombs
                 }
         }
+        this.cellsTotal = this.rows * this.columns
     }
     buildBoard(){
         try{
+            this.revealedCells = 0
             errorMensage.textContent = ''
             let root = document.documentElement
             root.style.setProperty('--board-colums', this.columns)
@@ -113,11 +116,11 @@ class Board{
         }
         this.bombIndex = bombPosition
     }
-    showAllBombs(){
+    showAllBombs(img){
         for(let id of this.bombIndex){
             const cell = document.getElementById(id)
             const fragment = document.createElement('img')
-            fragment.setAttribute('src', 'assets/images/bomb.svg')
+            fragment.setAttribute('src', `assets/images/${img}.svg`)
             fragment.classList.add('bomb')
             cell.append(fragment)
         }
@@ -188,7 +191,7 @@ const dificultySetting = () =>{
         case 'custom':
             form[1].value = '8'
             form[2].value = '8'
-            form[3].value = '1'
+            form[3].value = '10'
             break;
         }
     }
@@ -201,6 +204,7 @@ const revealCell = (cell) => {
         setGameOver()
         return
     }
+    boardStats.revealedCells++
     const value = calculateCellValue(cell)
     setColor(cell, value)
     cell.classList.replace('cell', 'cell_revealed')
@@ -215,6 +219,9 @@ const revealCell = (cell) => {
     }else{
     cell.textContent = value
     }
+    if(boardStats.revealedCells + boardStats.bombs == boardStats.cellsTotal){
+        victory()
+    }
 }
 }
 
@@ -224,7 +231,7 @@ const isBomb = (id) =>{
 
 const setGameOver = () =>{
     head.setAttribute('src', 'assets/images/dead.svg')
-    boardStats.showAllBombs()
+    boardStats.showAllBombs('bomb')
     timer.stopTimer()
     gameOver = true
 }
@@ -281,4 +288,14 @@ const getAdjacentCells = (id) =>{
         `${parseInt(xPos)-1} ${parseInt(yPos)+1}`,
         `${parseInt(xPos)-1} ${parseInt(yPos)}`,
     ]
+}
+
+const victory = () => {
+    if(!gameOver){
+        timer.stopTimer()
+        head.setAttribute('src', 'assets/images/cool.svg')
+        gameOver = true
+        boardStats.showAllBombs('flag')
+        console.log('You Win!!')
+    }
 }
